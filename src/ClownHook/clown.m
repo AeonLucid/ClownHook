@@ -19,11 +19,7 @@ void clown_init() {
     uc_err err;
 
     err = uc_open(UC_ARCH_ARM64, UC_MODE_ARM, &uc);
-    if (err) {
-        printf("Failed on uc_open() with error returned: %u (%s)\n",
-                err, uc_strerror(err));
-        return;
-    }
+    printf("uc_open() gave: %u (%s)\n", err, uc_strerror(err));
 
     printf("[+] clown_init\n");
 

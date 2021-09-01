@@ -1,7 +1,14 @@
 {
     "name": "ClownHook",
     "options": {
-        "bundleIdPrefix": "com.aeonlucid.clownhook"
+        "bundleIdPrefix": "com.aeonlucid.clownhook",
+        "transitivelyLinkDependencies": true
+    },
+    "settings": {
+        "LIBRARY_SEARCH_PATHS": [
+            "$(inherited)",
+            "$(SRCROOT)/submodules/unicorn"
+        ]
     },
     "targets": {
         "ClownHookApp_iOS": {
@@ -31,9 +38,6 @@
             "dependencies": [
                 {
                     "target": "ClownHook_macOS"
-                },
-                {
-                    "target": "Unicorn_macOS"
                 }
             ],
             "settings": {
@@ -56,6 +60,12 @@
             "dependencies": [
                 {
                     "target": "Unicorn_${platform}"
+                },
+                {
+                    "framework": "libunicorn.a",
+                    "type": "library.static",
+                    "embed": false,
+                    "link": true
                 }
             ],
             "settings": {
