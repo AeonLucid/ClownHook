@@ -5,10 +5,7 @@
         "transitivelyLinkDependencies": true
     },
     "settings": {
-        "LIBRARY_SEARCH_PATHS": [
-            "$(inherited)",
-            "$(SRCROOT)/lib"
-        ]
+        "ONLY_ACTIVE_ARCH": "yes"
     },
     "targets": {
         "ClownHookApp_iOS": {
@@ -56,37 +53,7 @@
                 {
                     "path": "src/ClownHook"
                 }
-            ],
-            "dependencies": [
-                {
-                    "target": "Unicorn_${platform}"
-                },
-                {
-                    "framework": "libunicorn_${platform}.a",
-                    "type": "library.static",
-                    "embed": false,
-                    "link": true
-                }
-            ],
-            "settings": {
-                "HEADER_SEARCH_PATHS": [
-                    "submodules/unicorn/include",
-                    "$(inherited)"
-                ]
-            }
-        },
-        "Unicorn": {
-            "type": "",
-            "platform": ["iOS", "macOS"],
-            "deploymentTarget": {
-                "iOS": "13.0",
-                "macOS": "11.2"
-            },
-            "legacy": {
-                "toolPath": "$(SRCROOT)/scripts/build_unicorn.sh",
-                "workingDirectory": "$(SRCROOT)",
-                "passSettings": true
-            }
+            ]
         }
     }
 }
