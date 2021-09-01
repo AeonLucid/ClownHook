@@ -7,7 +7,7 @@
     "settings": {
         "LIBRARY_SEARCH_PATHS": [
             "$(inherited)",
-            "$(SRCROOT)/submodules/unicorn"
+            "$(SRCROOT)/lib"
         ]
     },
     "targets": {
@@ -62,7 +62,7 @@
                     "target": "Unicorn_${platform}"
                 },
                 {
-                    "framework": "libunicorn.a",
+                    "framework": "libunicorn_${platform}.a",
                     "type": "library.static",
                     "embed": false,
                     "link": true
@@ -83,14 +83,9 @@
                 "macOS": "11.2"
             },
             "legacy": {
-                "toolPath": "/usr/bin/make",
-                "workingDirectory": "$(SRCROOT)/submodules/unicorn",
+                "toolPath": "$(SRCROOT)/scripts/build_unicorn.sh",
+                "workingDirectory": "$(SRCROOT)",
                 "passSettings": true
-            },
-            "settings": {
-                "UNICORN_ARCHS": "aarch64",
-                "UNICORN_SHARED": "no",
-                "UNICORN_STATIC": "yes"
             }
         }
     }
