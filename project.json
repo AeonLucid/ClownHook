@@ -1,0 +1,60 @@
+{
+    "name": "ClownHook",
+    "options": {
+        "bundleIdPrefix": "com.aeonlucid.clownhook"
+    },
+    "targets": {
+        "ClownHookApp_iOS": {
+            "type": "application",
+            "platform": "iOS",
+            "deploymentTarget": "13.0",
+            "sources": [
+                {
+                    "path": "src/ClownHookApp_iOS"
+                }
+            ],
+            "dependencies": [
+                {
+                    "target": "ClownHook_iOS"
+                }
+            ]
+        },
+        "ClownHookApp_macOS": {
+            "type": "tool",
+            "platform": "macOS",
+            "deploymentTarget": "11.2",
+            "sources": [
+                {
+                    "path": "src/ClownHookApp_macOS"
+                }
+            ],
+            "dependencies": [
+                {
+                    "target": "ClownHook_macOS"
+                }
+            ],
+            "settings": {
+                "ENABLE_HARDENED_RUNTIME": "YES",
+                "CODE_SIGN_STYLE": "Automatic"
+            }
+        },
+        "ClownHook_iOS": {
+            "type": "library.static",
+            "platform": "iOS",
+            "sources": [
+                {
+                    "path": "src/ClownHook"
+                }
+            ]
+        },
+        "ClownHook_macOS": {
+            "type": "library.static",
+            "platform": "macOS",
+            "sources": [
+                {
+                    "path": "src/ClownHook"
+                }
+            ]
+        }
+    }
+}
