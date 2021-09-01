@@ -7,6 +7,7 @@
 #import <mach/mach.h>
 #import <mach-o/loader.h>
 #import <Foundation/Foundation.h>
+#import <unicorn/unicorn.h>
 
 static void page_mapper(int signo, siginfo_t *info, void *uapVoid) {
     printf("[+] page_mapper %p\n", info->si_addr);
@@ -14,6 +15,16 @@ static void page_mapper(int signo, siginfo_t *info, void *uapVoid) {
 }
 
 void clown_init() {
+    uc_engine *uc;
+    uc_err err;
+
+    err = uc_open(UC_ARCH_ARM64, UC_MODE_ARM, &uc);
+    if (err) {
+        printf("Failed on uc_open() with error returned: %u (%s)\n",
+                err, uc_strerror(err));
+        return;
+    }
+
     printf("[+] clown_init\n");
 
     struct sigaction act;

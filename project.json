@@ -31,6 +31,9 @@
             "dependencies": [
                 {
                     "target": "ClownHook_macOS"
+                },
+                {
+                    "target": "Unicorn_macOS"
                 }
             ],
             "settings": {
@@ -38,23 +41,133 @@
                 "CODE_SIGN_STYLE": "Automatic"
             }
         },
-        "ClownHook_iOS": {
+        "ClownHook": {
             "type": "library.static",
-            "platform": "iOS",
+            "platform": ["iOS", "macOS"],
+            "deploymentTarget": {
+                "iOS": "13.0",
+                "macOS": "11.2"
+            },
             "sources": [
                 {
                     "path": "src/ClownHook"
                 }
-            ]
+            ],
+            "dependencies": [
+                {
+                    "target": "Unicorn_${platform}"
+                }
+            ],
+            "settings": {
+                "HEADER_SEARCH_PATHS": [
+                    "submodules/unicorn/include",
+                    "$(inherited)"
+                ]
+            }
         },
-        "ClownHook_macOS": {
+        "Unicorn": {
             "type": "library.static",
-            "platform": "macOS",
+            "platform": ["iOS", "macOS"],
+            "deploymentTarget": {
+                "iOS": "13.0",
+                "macOS": "11.2"
+            },
             "sources": [
                 {
-                    "path": "src/ClownHook"
+                    "path": "submodules/unicorn",
+                    "includes": [
+                        "list.c",
+                        "qemu/accel.c",
+                        "qemu/glib_compat.c",
+                        "qemu/hw/core/machine.c",
+                        "qemu/hw/core/qdev.c",
+                        "qemu/qapi/qapi-dealloc-visitor.c",
+                        "qemu/qapi/qapi-visit-core.c",
+                        "qemu/qapi/qmp-input-visitor.c",
+                        "qemu/qapi/qmp-output-visitor.c",
+                        "qemu/qapi/string-input-visitor.c",
+                        "qemu/qemu-log.c",
+                        "qemu/qemu-timer.c",
+                        "qemu/qobject/qbool.c",
+                        "qemu/qobject/qdict.c",
+                        "qemu/qobject/qerror.c",
+                        "qemu/qobject/qfloat.c",
+                        "qemu/qobject/qint.c",
+                        "qemu/qobject/qlist.c",
+                        "qemu/qobject/qstring.c",
+                        "qemu/qom/container.c",
+                        "qemu/qom/cpu.c",
+                        "qemu/qom/object.c",
+                        "qemu/qom/qom-qobject.c",
+                        "qemu/tcg-runtime.c",
+                        "qemu/util/aes.c",
+                        "qemu/util/bitmap.c",
+                        "qemu/util/bitops.c",
+                        "qemu/util/crc32c.c",
+                        "qemu/util/cutils.c",
+                        "qemu/util/error.c",
+                        "qemu/util/getauxval.c",
+                        "qemu/util/host-utils.c",
+                        "qemu/util/module.c",
+                        "qemu/util/qemu-timer-common.c",
+                        "qemu/vl.c",
+                        "qemu/cpu-exec.c",
+                        "qemu/cpus.c",
+                        "qemu/cputlb.c",
+                        "qemu/exec.c",
+                        "qemu/fpu/softfloat.c",
+                        "qemu/hw/arm/tosa.c",
+                        "qemu/hw/arm/virt.c",
+                        "qemu/ioport.c",
+                        "qemu/memory.c",
+                        "qemu/memory_mapping.c",
+                        "qemu/target-arm/cpu.c",
+                        "qemu/target-arm/cpu64.c",
+                        "qemu/target-arm/crypto_helper.c",
+                        "qemu/target-arm/helper-a64.c",
+                        "qemu/target-arm/helper.c",
+                        "qemu/target-arm/iwmmxt_helper.c",
+                        "qemu/target-arm/neon_helper.c",
+                        "qemu/target-arm/op_helper.c",
+                        "qemu/target-arm/psci.c",
+                        "qemu/target-arm/translate-a64.c",
+                        "qemu/target-arm/translate.c",
+                        "qemu/target-arm/unicorn_aarch64.c",
+                        "qemu/tcg/optimize.c",
+                        "qemu/tcg/tcg.c",
+                        "qemu/translate-all.c",
+                        "uc.c",
+                        "qemu/*.h",
+                        "qemu/include/*.h",
+                        "qemu/include/tcg/*.h",
+                        "include/*.h"
+                    ],
+                    "compilerFlags": [
+                        "-DNEED_CPU_H",
+                        "-DUNICORN_HAS_ARM64"
+                    ]
                 }
-            ]
+            ],
+            "settings": {
+                "HEADER_SEARCH_PATHS": [
+                    "submodules/unicorn/qemu",
+                    "submodules/unicorn/qemu/include",
+                    "submodules/unicorn/qemu/tcg",
+                    "submodules/unicorn/qemu/tcg/aarch64",
+                    "submodules/unicorn/qemu/target-arm",
+                    "submodules/unicorn/include",
+                    "$(inherited)"
+                ],
+                "USER_HEADER_SEARCH_PATHS": [
+                    "submodules/unicorn/qemu",
+                    "submodules/unicorn/qemu/include",
+                    "submodules/unicorn/qemu/tcg",
+                    "submodules/unicorn/qemu/tcg/aarch64",
+                    "submodules/unicorn/qemu/target-arm",
+                    "submodules/unicorn/include",
+                    "src/Unicorn"
+                ]
+            }
         }
     }
 }
